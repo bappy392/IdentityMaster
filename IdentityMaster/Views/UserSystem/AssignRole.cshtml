@@ -1,0 +1,34 @@
+﻿@model IdentityMaster.Models.ManageUserRolesVM
+@{
+    ViewData["Title"] = "AssignRole";
+}
+
+<h1>AssignRole</h1>
+
+<div class="row">
+    <div class="container">
+        <div class="form-group">
+            <label>FullName: @Model.AppUser.FullName</label><br />
+            <label>UserName: @Model.AppUser.UserName</label><br />
+            <label>Email: @Model.AppUser.Email</label><br />
+        </div>
+
+        <form asp-action="AssignRole" method="post">
+            <input type="hidden" asp-for="@Model.AppUser.Id" />
+
+            @for (int i = 0; i < @Model.Roles.Count; i++)
+            {
+                <input type="hidden" asp-for="@Model.Roles[i].Value" />
+                <input asp-for="@Model.Roles[i].Selected" />@Model.Roles[i].Text <span>&nbsp;</span>
+            }
+
+            <div class="form-group mt-5">
+                <input type="submit" value="save" class="btn btn-success" /> |
+                <a asp-action="index" class="btn btn-primary">Back</a>
+            </div>
+        </form>
+
+
+    </div>
+
+</div>
